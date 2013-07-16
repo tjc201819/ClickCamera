@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <QuartzCore/QuartzCore.h>
 
 //http://stackoverflow.com/questions/10954380/save-photos-to-custom-album-in-iphones-photo-library
 
@@ -60,7 +61,13 @@
     CGImageRef originalImage = [representation fullResolutionImage];
     UIImage *original = [UIImage imageWithCGImage:originalImage];
     
-    [self.scrollView addSubview:[[UIImageView alloc] initWithImage:thumbnail]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:thumbnail];
+    imageView.frame = CGRectMake(0,0,29,29);
+    CALayer *layer = [imageView layer];
+    layer.cornerRadius = 4.0f;
+    layer.masksToBounds = YES;
+    
+    [self.scrollView addSubview:imageView];
 }
 
 
@@ -209,6 +216,7 @@
         
         cameraUI.mediaTypes = [NSArray arrayWithObject:(NSString *) kUTTypeMovie];
         cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
+        cameraUI.videoQuality = UIImagePickerControllerQualityTypeLow;
         
     } else {
         return NO;
