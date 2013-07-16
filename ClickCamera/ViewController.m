@@ -10,6 +10,8 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
+//http://stackoverflow.com/questions/10954380/save-photos-to-custom-album-in-iphones-photo-library
+
 @interface ViewController ()
 
 @end
@@ -50,7 +52,30 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [self dismissModalViewControllerAnimated:NO];
     
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+    
     ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    
+    [library addAssetsGroupAlbumWithName:dateString resultBlock:^(ALAssetsGroup *group) {   //!!! Пока создается альбом уже идет выполнение нижнего блока
+        NSLog(@"added album:%@", dateString);
+    }
+    failureBlock:^(NSError *error) {
+         NSLog(@"error adding album");
+    }];
+    
+    __block ALAssetsGroup* groupToAddTo;
+    [library enumerateGroupsWithTypes:ALAssetsGroupAlbum
+                                usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+                                    if ([[group valueForProperty:ALAssetsGroupPropertyName] isEqualToString:dateString]) {
+                                        NSLog(@"found album %@", dateString);
+                                        groupToAddTo = group;
+                                    }
+                                }
+                              failureBlock:^(NSError* error) {
+                                  NSLog(@"failed to enumerate albums:\nError: %@", [error localizedDescription]);
+                              }];
     
     if( [info objectForKey:UIImagePickerControllerEditedImage] != nil)  {
         UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
@@ -61,6 +86,15 @@
             }
             else {
                 NSLog(@"Photo saved (%@)", assetURL);
+                
+                [library assetForURL:assetURL
+                         resultBlock:^(ALAsset *asset) {
+                             [groupToAddTo addAsset:asset];
+                             NSLog(@"Added %@ to %@", [[asset defaultRepresentation] filename], dateString);
+                         }
+                        failureBlock:^(NSError* error) {
+                            NSLog(@"failed to retrieve image asset:\nError: %@ ", [error localizedDescription]);
+                        }];
             }
         }];
         
@@ -73,6 +107,15 @@
             }
             else {
                 NSLog(@"Video saved (%@)", assetURL);
+                
+                [library assetForURL:assetURL
+                         resultBlock:^(ALAsset *asset) {
+                             [groupToAddTo addAsset:asset];
+                             NSLog(@"Added %@ to %@", [[asset defaultRepresentation] filename], dateString);
+                         }
+                        failureBlock:^(NSError* error) {
+                            NSLog(@"failed to retrieve image asset:\nError: %@ ", [error localizedDescription]);
+                        }];
             }
         }];
     }
@@ -193,6 +236,5 @@
     
     return YES;
 }
-
 
 @end
