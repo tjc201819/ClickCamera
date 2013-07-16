@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface ViewController ()
 
@@ -38,6 +39,49 @@
         [self shouldPresentPhotoCaptureController];
     }
 }
+
+#pragma mark - UIImagePickerDelegate
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    NSLog(@"Cancel");
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [self dismissModalViewControllerAnimated:NO];
+    
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    
+    if( [info objectForKey:UIImagePickerControllerEditedImage] != nil)  {
+        UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+        
+        [library writeImageToSavedPhotosAlbum:image.CGImage metadata:nil completionBlock:^(NSURL *assetURL, NSError *error) {
+            if (error) {
+                NSLog(@"ERROR: the image failed to be written");
+            }
+            else {
+                NSLog(@"Photo saved (%@)", assetURL);
+            }
+        }];
+        
+    } else if([info objectForKey:UIImagePickerControllerMediaURL] != nil) {
+        NSURL *videoURL = [info objectForKey:UIImagePickerControllerMediaURL];
+        
+        [library writeVideoAtPathToSavedPhotosAlbum:videoURL completionBlock:^(NSURL *assetURL, NSError *error) {
+            if (error) {
+                NSLog(@"ERROR: the video failed to be written");
+            }
+            else {
+                NSLog(@"Video saved (%@)", assetURL);
+            }
+        }];
+    }
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+}
+
+#pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
