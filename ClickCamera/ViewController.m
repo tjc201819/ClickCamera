@@ -8,8 +8,6 @@
 
 #import "ViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
-#import <AssetsLibrary/AssetsLibrary.h>
-#import <QuartzCore/QuartzCore.h>
 
 //http://stackoverflow.com/questions/10954380/save-photos-to-custom-album-in-iphones-photo-library
 
@@ -18,6 +16,9 @@
 @end
 
 @implementation ViewController
+{
+    NSMutableArray *reportAddData;
+}
 
 - (void)viewDidLoad
 {
@@ -33,6 +34,8 @@
     self.navigationItem.titleView = cameraButton;
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundLeather.png"]];
+    
+    [reportAddData removeAllObjects];
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,22 +55,36 @@
     }
 }
 
--(void) addDataToScrollReportArray:(ALAsset*)asset
+-(void) addDataToScrollReportArray:(ALAsset*)asset2
 {
-    CGImageRef thumbnailImageRef = [asset thumbnail];
-    UIImage *thumbnail = [UIImage imageWithCGImage:thumbnailImageRef];
+    NSString *assetURL = [asset2.defaultRepresentation.url absoluteString];
     
-    ALAssetRepresentation *representation = [asset defaultRepresentation];
-    CGImageRef originalImage = [representation fullResolutionImage];
-    UIImage *original = [UIImage imageWithCGImage:originalImage];
+    [reportAddData addObject: assetURL];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:thumbnail];
-    imageView.frame = CGRectMake(0,0,29,29);
-    CALayer *layer = [imageView layer];
-    layer.cornerRadius = 4.0f;
-    layer.masksToBounds = YES;
+    [self.scrollView addDataObject:assetURL];
     
-    [self.scrollView addSubview:imageView];
+    /*ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    [library assetForURL:[NSURL URLWithString:assetURL] resultBlock:^(ALAsset *asset) {
+        NSLog(@"asset successful");
+        
+        CGImageRef thumbnailImageRef = [asset thumbnail];
+        UIImage *thumbnail = [UIImage imageWithCGImage:thumbnailImageRef];
+        
+        ALAssetRepresentation *representation = [asset defaultRepresentation];
+        CGImageRef originalImage = [representation fullResolutionImage];
+        UIImage *original = [UIImage imageWithCGImage:originalImage];
+        
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:original];
+        imageView.frame = CGRectMake(0,0,29,29);
+        CALayer *layer = [imageView layer];
+        layer.cornerRadius = 4.0f;
+        layer.masksToBounds = YES;
+        
+        [self.scrollView addSubview:imageView];
+        
+    } failureBlock:^(NSError *error) {
+        NSLog(@"asset failture");
+    }];*/
 }
 
 
