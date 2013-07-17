@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "MultiContentScrollView.h"
+#import "EditPhotoViewController.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <EditPhotoViewDelegate>
 
 @property (nonatomic, strong) IBOutlet MultiContentScrollView *scrollView;
 

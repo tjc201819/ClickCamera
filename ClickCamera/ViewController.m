@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
+#import "EditPhotoViewController.h"
 
 //http://stackoverflow.com/questions/10954380/save-photos-to-custom-album-in-iphones-photo-library
 
@@ -55,9 +56,9 @@
     }
 }
 
--(void) addDataToScrollReportArray:(ALAsset*)asset2
+-(void) addDataToScrollReportArray:(ALAsset*)asset
 {
-    NSString *assetURL = [asset2.defaultRepresentation.url absoluteString];
+    NSString *assetURL = [asset.defaultRepresentation.url absoluteString];
     
     [reportAddData addObject: assetURL];
     
@@ -74,13 +75,7 @@
         CGImageRef originalImage = [representation fullResolutionImage];
         UIImage *original = [UIImage imageWithCGImage:originalImage];
         
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:original];
-        imageView.frame = CGRectMake(0,0,29,29);
-        CALayer *layer = [imageView layer];
-        layer.cornerRadius = 4.0f;
-        layer.masksToBounds = YES;
-        
-        [self.scrollView addSubview:imageView];
+        //[self presentModalViewController:self.navigationController animated:YES];
         
     } failureBlock:^(NSError *error) {
         NSLog(@"asset failture");
@@ -97,7 +92,16 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [self dismissModalViewControllerAnimated:NO];
     
-    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    EditPhotoViewController *viewController = [[EditPhotoViewController alloc] initWithDictionary:info];
+    viewController.delegate = (id)self;
+    [viewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    
+    [self.navigationController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    [self.navigationController pushViewController:viewController animated:NO];
+    
+    //[self presentModalViewController:self.navigationController animated:YES];
+    
+    /*NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd-MM-yyyy"];
     NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
     
@@ -171,7 +175,7 @@
     }
     failureBlock:^(NSError *error) {
         NSLog(@"error adding album");
-    }];
+    }];*/
 }
 
 #pragma mark - UIActionSheetDelegate

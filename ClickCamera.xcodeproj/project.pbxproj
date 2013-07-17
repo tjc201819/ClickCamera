@@ -14,6 +14,7 @@
 		18FD99321795C7CE0094B560 /* backgroundLeather.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FD99301795C7CE0094B560 /* backgroundLeather.png */; };
 		18FD99331795C7CE0094B560 /* backgroundLeather@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FD99311795C7CE0094B560 /* backgroundLeather@2x.png */; };
 		18FD99761796D5510094B560 /* MultiContentScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FD99751796D5510094B560 /* MultiContentScrollView.m */; };
+		18FD997D17970BC90094B560 /* EditPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FD997C17970BC80094B560 /* EditPhotoViewController.m */; };
 		7CEC23FE179556630007C39C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CEC23FD179556630007C39C /* UIKit.framework */; };
 		7CEC2400179556630007C39C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CEC23FF179556630007C39C /* Foundation.framework */; };
 		7CEC2402179556630007C39C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CEC2401179556630007C39C /* CoreGraphics.framework */; };
@@ -38,6 +39,8 @@
 		18FD99311795C7CE0094B560 /* backgroundLeather@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backgroundLeather@2x.png"; sourceTree = "<group>"; };
 		18FD99741796D5510094B560 /* MultiContentScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiContentScrollView.h; sourceTree = "<group>"; };
 		18FD99751796D5510094B560 /* MultiContentScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiContentScrollView.m; sourceTree = "<group>"; };
+		18FD997B17970BC70094B560 /* EditPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPhotoViewController.h; sourceTree = "<group>"; };
+		18FD997C17970BC80094B560 /* EditPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPhotoViewController.m; sourceTree = "<group>"; };
 		7CEC23FA179556630007C39C /* ClickCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClickCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CEC23FD179556630007C39C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7CEC23FF179556630007C39C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -128,6 +131,8 @@
 				7CEC2404179556630007C39C /* Supporting Files */,
 				18FD99741796D5510094B560 /* MultiContentScrollView.h */,
 				18FD99751796D5510094B560 /* MultiContentScrollView.m */,
+				18FD997B17970BC70094B560 /* EditPhotoViewController.h */,
+				18FD997C17970BC80094B560 /* EditPhotoViewController.m */,
 			);
 			path = ClickCamera;
 			sourceTree = "<group>";
@@ -222,6 +227,7 @@
 				7CEC240E179556630007C39C /* AppDelegate.m in Sources */,
 				7CEC2417179556630007C39C /* ViewController.m in Sources */,
 				18FD99761796D5510094B560 /* MultiContentScrollView.m in Sources */,
+				18FD997D17970BC90094B560 /* EditPhotoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
