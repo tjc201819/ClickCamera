@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GPUImage.h"
 
 @protocol EditPhotoViewDelegate <NSObject>
 -(void) addDataToScrollReportArray:(ALAsset*)asset;
