@@ -8,6 +8,7 @@
 
 #import "MultiContentScrollView.h"
 #import <objc/runtime.h>
+#import <HRCoder/HRCoder.h>
 
 static char STRING_KEY;
 
@@ -50,6 +51,11 @@ static char STRING_KEY;
     } failureBlock:^(NSError *error) {
         NSLog(@"asset failture");
     }];
+}
+
+-(void) readDataObject
+{
+    
 }
 
 - (void) dataTap:(UITapGestureRecognizer *)sender

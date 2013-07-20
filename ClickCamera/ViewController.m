@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "EditPhotoViewController.h"
+#import "DataCameraManager.h"
+#import <HRCoder/HRCoder.h>
 
 //http://stackoverflow.com/questions/10954380/save-photos-to-custom-album-in-iphones-photo-library
 
@@ -37,6 +39,15 @@
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundLeather.png"]];
     
     [reportAddData removeAllObjects];
+    
+    NSLog(@"COUNT=>%i",[DataCameraManager sharedList].reportListData.count);
+    if([DataCameraManager sharedList].reportListData.count > 0)
+    {
+        for(NSString *assetURL in [DataCameraManager sharedList].reportListData)
+        {
+            [self.scrollView addDataObject:assetURL];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,11 +67,21 @@
     }
 }
 
+- (NSString *)documentsDirectory
+{
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	return [paths objectAtIndex:0];
+}
+
 -(void) addDataToScrollReportArray:(ALAsset*)asset
 {
     NSString *assetURL = [asset.defaultRepresentation.url absoluteString];
     
     [reportAddData addObject: assetURL];
+    
+    [[DataCameraManager sharedList].reportListData addObject:assetURL];
+    [[DataCameraManager sharedList] save];
+    NSLog(@"=>%i", [DataCameraManager sharedList].reportListData.count);
     
     [self.scrollView addDataObject:assetURL];
     

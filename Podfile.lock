@@ -1,10 +1,13 @@
 PODS:
   - GPUImage (0.1.0)
+  - HRCoder (1.2.2)
 
 DEPENDENCIES:
   - GPUImage
+  - HRCoder
 
 SPEC CHECKSUMS:
   GPUImage: 5b902c1df2afe0ac30a8e3e7379f9c0bb25c7c85
+  HRCoder: 686700a4246e96844cc898052da171229ee5f65d
 
 COCOAPODS: 0.19.1

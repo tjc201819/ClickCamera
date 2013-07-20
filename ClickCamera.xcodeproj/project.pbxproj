@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		189A2D491799D1B7006F0DA2 /* DataCameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 189A2D481799D1B7006F0DA2 /* DataCameraManager.m */; };
 		18FD992C1795C6D50094B560 /* buttonCamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FD99281795C6D50094B560 /* buttonCamera.png */; };
 		18FD992D1795C6D50094B560 /* buttonCamera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FD99291795C6D50094B560 /* buttonCamera@2x.png */; };
 		18FD992E1795C6D50094B560 /* buttonCameraSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FD992A1795C6D50094B560 /* buttonCameraSelected.png */; };
@@ -61,6 +62,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		189A2D471799D1B7006F0DA2 /* DataCameraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCameraManager.h; sourceTree = "<group>"; };
+		189A2D481799D1B7006F0DA2 /* DataCameraManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCameraManager.m; sourceTree = "<group>"; };
 		18FD99281795C6D50094B560 /* buttonCamera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonCamera.png; sourceTree = "<group>"; };
 		18FD99291795C6D50094B560 /* buttonCamera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonCamera@2x.png"; sourceTree = "<group>"; };
 		18FD992A1795C6D50094B560 /* buttonCameraSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonCameraSelected.png; sourceTree = "<group>"; };
@@ -253,6 +256,8 @@
 				18FD99751796D5510094B560 /* MultiContentScrollView.m */,
 				18FD997B17970BC70094B560 /* EditPhotoViewController.h */,
 				18FD997C17970BC80094B560 /* EditPhotoViewController.m */,
+				189A2D471799D1B7006F0DA2 /* DataCameraManager.h */,
+				189A2D481799D1B7006F0DA2 /* DataCameraManager.m */,
 			);
 			path = ClickCamera;
 			sourceTree = "<group>";
@@ -409,6 +414,7 @@
 				18FD99761796D5510094B560 /* MultiContentScrollView.m in Sources */,
 				18FD997D17970BC90094B560 /* EditPhotoViewController.m in Sources */,
 				18FD99AD17987A340094B560 /* GrayscaleContrastFilter.m in Sources */,
+				189A2D491799D1B7006F0DA2 /* DataCameraManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
